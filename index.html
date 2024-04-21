@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Abacus Simulator</title>
+    <script src="./talmas.js"></script>
+    <script type="text/javascript">
+      function run() {
+        var abacus = new Abacus("myAbacus", 0);
+        abacus.init();
+      }
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body onload="run();" style="background-color: #d8d9da !important;">
+    <div style="padding: 50px">
+      <img src="static/talmas_logo.png" alt="Talmas" class="logo" />
+    </div>
+    <div class="beads_container">
+      <div class="frame"></div>
+      <h1 id="talmas" class="vertical-text">
+        T<br /><br />A<br /><br />L<br /><br />M<br /><br />A<br /><br />S
+      </h1>
+      <span id="myAbacus">
+        <!-- <div class="vertical-ruler" ></div> -->
+
+        <div class="right-ruler">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="420">
+            <!-- Vertical line -->
+            <line
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="400"
+              stroke="black"
+              stroke-width="2"
+            />
+
+            <!-- Marks and text -->
+            <g
+              font-family="Arial"
+              font-size="20"
+              fill="black"
+            >
+              <text x="45" y="27" text-anchor="end">10</text>
+              <text x="35" y="67" text-anchor="end">9</text>
+              <text x="35" y="107" text-anchor="end">8</text>
+              <text x="35" y="147" text-anchor="end">7</text>
+              <text x="35" y="187" text-anchor="end">6</text>
+            </g>
+
+            <!-- Mark lines -->
+            <line
+              x1="0"
+              y1="20"
+              x2="20"
+              y2="20"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="0"
+              y1="60"
+              x2="20"
+              y2="60"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="0"
+              y1="100"
+              x2="20"
+              y2="100"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="0"
+              y1="140"
+              x2="20"
+              y2="140"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="0"
+              y1="180"
+              x2="20"
+              y2="180"
+              stroke="black"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div class="left-ruler">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="420">
+            <!-- Vertical line -->
+            <line
+              x1="100"
+              y1="0"
+              x2="100"
+              y2="400"
+              stroke="black"
+              stroke-width="2"
+            />
+
+            <!-- Marks and text -->
+            <g
+              font-family="Arial"
+              font-size="20"
+              fill="black"
+            >
+              <!-- Starting mark at 10 -->
+              <text x="80" y="27" text-anchor="end">10</text>
+              <!-- Marks and text at 10-unit intervals -->
+              <text x="80" y="67" text-anchor="end">20</text>
+              <text x="80" y="107" text-anchor="end">30</text>
+              <text x="80" y="147" text-anchor="end">40</text>
+              <text x="80" y="187" text-anchor="end">50</text>
+              <text x="80" y="227" text-anchor="end">60</text>
+              <text x="80" y="267" text-anchor="end">70</text>
+              <text x="80" y="307" text-anchor="end">80</text>
+              <text x="80" y="347" text-anchor="end">90</text>
+              <!-- Ending mark at 100 -->
+              <text x="80" y="387" text-anchor="end">100</text>
+            </g>
+
+            <!-- Mark lines -->
+            <line
+              x1="100"
+              y1="20"
+              x2="85"
+              y2="20"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="60"
+              x2="85"
+              y2="60"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="100"
+              x2="85"
+              y2="100"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="140"
+              x2="85"
+              y2="140"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="180"
+              x2="85"
+              y2="180"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="220"
+              x2="85"
+              y2="220"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="260"
+              x2="85"
+              y2="260"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="300"
+              x2="85"
+              y2="300"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="340"
+              x2="85"
+              y2="340"
+              stroke="black"
+              stroke-width="2"
+            />
+            <line
+              x1="100"
+              y1="380"
+              x2="85"
+              y2="380"
+              stroke="black"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+      </span>
+    </div>
+
+    <script>
+      var flag;
+      const searchParams = new URLSearchParams(window.location.search);
+      for (const param of searchParams) {
+        // console.log(param);
+        flag = param[1];
+      }
+      if (flag !== "45cc9cb99afe5a6d18983ac76c0dbc49") {
+        window.location.href = "login.html"; // Redirect to login page if not authorized
+      }
+    </script>
+  </body>
+</html>
