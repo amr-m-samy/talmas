@@ -1,0 +1,21 @@
+
+
+We have a request from a customer who wants to build a static web application that simulates a calculator like an Abacus Calculator but with a different shape and different type of calculation and he named it TALMAS like (UCMAS).
+the project description is:
+"a calculating instrument software simulator that uses beads that slide along a series of rods set in a frame.  Users manipulate the beads to perform calculations, Users could click or drag on the beads to move them up and down on the rods, simulating the physical manipulation"
+Based on the meeting  We decided that the customer requirements are:
+Mobile responsive 
+Drawing Objects
+Draggable objects with touch screens and mouse
+Auto Calculations
+Login Page ( notes that the authentication is not secure enough because we don't work in the backend server)
+Code Generator (note: to generate a code each time anyone login)
+Simple frontend design
+
+The developers team met and agreed that the project needs 20 working hours and delivered within three days
+In our company, we calculate the working hours with 20$ per hour 
+A customer requested another project quotation, we will give him a 25% offer in total of both if he decides to make the two projects at the same time
+We will host the project in our free host and domain for a maximum of 2 months until his host and domain are ready to host the project.
+Because the project is small we will not take a downpayment and we will take all the fees after finishing it 
+We will guarantee  free bugs for 3 months and after that, we will  fix bugs according to it and will charge per hour 
+If the customer needs to add a new feature (not in this quotation) this will cost him another fee 

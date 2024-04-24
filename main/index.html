@@ -14,6 +14,18 @@
         var abacus = new Abacus("talmas", 0, scale);
         abacus.init();
       }
+
+      var flag;
+      const searchParams = new URLSearchParams(window.location.search);
+      for (const param of searchParams) {
+        // console.log(param);
+        flag = param[1];
+      }
+
+      if (flag !== localStorage.getItem("code")) {
+        window.location.href = "login.html"; // Redirect to login page if not authorized
+      }
+
       window.onresize = function () {
         location.reload();
       };

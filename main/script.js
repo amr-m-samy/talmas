@@ -116,10 +116,7 @@ function Abacus(parentDivId, type, scale) {
   var abacusCtrl = new AbacusCtrl(type, scale);
   var canvas;
   var divId = parentDivId;
-  var beadColor = "rgba(133, 178, 255, 1.0)";
-  var hooveredBeadColor = "rgba(170, 215, 255, 1.0)";
-  var hooveredElement = -1;
-  var hooveredBead = -1;
+
   var uiElements = new Array();
   var that = this;
   let dragging = -1;
@@ -517,7 +514,7 @@ function Abacus(parentDivId, type, scale) {
 
         if (uiElements[selectedElement].type === 0) {
           var newSelectedBead = uiElements[selectedElement].ref;
-          hooveredBead = newSelectedBead;
+          // hooveredBead = newSelectedBead;
           dragging = newSelectedBead;
           storeOriginalY();
         }
@@ -531,19 +528,20 @@ function Abacus(parentDivId, type, scale) {
     restorOriginalY();
 
     if (!event.altKey && event.which === 1) {
-      var selectedElement = mouseOverElement(pos);
-      if (selectedElement !== -1) {
-        // handle node selection
-
-        if (uiElements[selectedElement].type === 0) {
-          var newSelectedBead = uiElements[selectedElement].ref;
-          if (newSelectedBead === dragging && dragging !== 30) {
-            abacusCtrl.activated(newSelectedBead);
-
-            bumpAudio();
-          }
-        }
-      }
+      if (dragging !== -1 && dragging !== 30) abacusCtrl.activated(dragging);
+      // var selectedElement = mouseOverElement(pos);
+      // if (selectedElement !== -1) {
+      //   // handle node selection
+      //
+      //   if (uiElements[selectedElement].type === 0) {
+      //     var newSelectedBead = uiElements[selectedElement].ref;
+      //     if (newSelectedBead === dragging && dragging !== 30) {
+      //
+      //       abacusCtrl.activated(dragging);
+      //       // bumpAudio();
+      //     }
+      //   }
+      // }
       draggedNow = [];
       that.update();
       dragging = -1;
@@ -585,20 +583,21 @@ function Abacus(parentDivId, type, scale) {
   function canvasTouchEnd(event) {
     restorOriginalY();
     if (!event.altKey && event.touches.length === 0) {
-      var selectedElement = mouseOverElement(touchPos);
+      if (dragging !== -1 && dragging !== 30) abacusCtrl.activated(dragging);
+      // var selectedElement = mouseOverElement(touchPos);
+      //
+      // if (selectedElement !== -1) {
+      //   if (uiElements[selectedElement].type === 0) {
+      //     var newSelectedBead = uiElements[selectedElement].ref;
+      //     if (newSelectedBead === dragging && dragging !== 30) {
+      //       abacusCtrl.activated(newSelectedBead);
+      //
+      //       // bumpAudio();
+      //     }
+      //   }
+      // }
 
-      if (selectedElement !== -1) {
-        if (uiElements[selectedElement].type === 0) {
-          var newSelectedBead = uiElements[selectedElement].ref;
-          if (newSelectedBead === dragging && dragging !== 30) {
-            abacusCtrl.activated(newSelectedBead);
-
-            bumpAudio();
-          }
-        }
-      }
-
-      hooveredBead = -1;
+      draggedNow = [];
       that.update();
       dragging = -1;
     }
@@ -687,15 +686,15 @@ function Abacus(parentDivId, type, scale) {
     const gradientTop = ctx.createLinearGradient(x, y, x, y + height / 2);
     if (nodeId >= 30 && nodeId <= 39) {
       if (nodeId === 30) {
-        gradientTop.addColorStop(0, "white");
-        gradientTop.addColorStop(1, "#0d21a1");
+        gradientTop.addColorStop(1, "#6c757d");
+        gradientTop.addColorStop(0, "#dee2e6");
       } else {
         if (!hoover) {
           gradientTop.addColorStop(0, "white");
           gradientTop.addColorStop(1, "#C7C8CC");
         } else {
-        gradientTop.addColorStop(1, "#6c757d");
-        gradientTop.addColorStop(0, "#dee2e6");
+          gradientTop.addColorStop(1, "#6c757d");
+          gradientTop.addColorStop(0, "#dee2e6");
         }
       }
     } else {
@@ -728,5 +727,60 @@ function Abacus(parentDivId, type, scale) {
 
     ctx.lineWidth = lineWidthBackup;
     ctx.strokeStyle = strokeStyleBackup;
+  }
+}
+
+// Generate a random password
+function generatePassword(length) {
+  const charset = "abcdefghijklmnopqrstuvwxy0123456789";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  debugger;
+  return password;
+}
+
+const loginForm = document.getElementById("login-form");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const messageElement = document.getElementById("login-message");
+let code;
+
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault(); // Prevent default form submission
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  // Replace with your validation logic
+  if (username === "student" && password === (await getPassword())) {
+    code = generatePassword(12);
+    localStorage.setItem("code", code);
+    window.location.href = `index.html?flag=${code}`;
+  } else {
+    messageElement.textContent = "The Username or Password is Incorrect";
+  }
+});
+async function getCode() {
+  try {
+    const response = await fetch("./data.json");
+    const json = await response.json();
+    return json.code;
+  } catch (error) {
+    console.error("Error reading password:", error);
+    // Handle the error here, maybe return a default value
+  }
+}
+
+async function getPassword() {
+  try {
+    const response = await fetch("./data.json");
+    const json = await response.json();
+    return json.password;
+  } catch (error) {
+    console.error("Error reading password:", error);
+    // Handle the error here, maybe return a default value
   }
 }
